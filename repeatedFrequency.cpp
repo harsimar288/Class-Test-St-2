@@ -1,40 +1,40 @@
-//Harsimar 2010990288  Set-1//
+//Harsimar 2010990288 Set-1
 
-#include <bits/stdc++.h>
-
+#include<bits/stdc++.h>
 using namespace std;
-
-//creating repeat function
-void findRepeat(int* a, int n){
-    unordered_map<int,int> hash;
-    
-    for(int i=0;i<n;i++){
-        hash[a[i]]++;
-    }
-    
-    cout<<"repeated Number frequency\n";
-   
-    for(auto it=hash.begin();it!=hash.end();it++)
-    if(it->second>1)
-    cout<<it->first<<"                  "<<it->second<<endl;
-    
-}
-
 int main()
 {
-    //user input
-    int n;
-    cout<<"enter array length\n";
+    int i,j,n,count;
+    // n >>no. of elements.
+    cout<<"Enter no. of elements:";
     cin>>n;
-    int* a=(int*)(malloc(sizeof(int)*n));
-    
-    cout<<"input array elements...\n";
-    
-    for(int i=0;i<n;i++){
-        cin>>a[i];
+    int set[n];
+    cout<<"\nEnter the elements:";
+    for(i=0; i<n; i++)
+    {
+       cin>>set[i];
     }
     
-    findRepeat(a,n);
-
-    return 0;
+    int flag[n]={0};          // Here, we have initialized all the blocks of the 'flag' array with 0.
+    cout<<"\nRepeated Numbers with their frequency:";
+    for(i=0; i<n; i++)
+    {
+      count=0;
+      if(flag[i]!=1)       // if element set[i] is not considered for counting the frequency of a repeated number
+      {
+         for(j=0; j<n; j++)
+         {
+            if(set[i]==set[j])
+            {
+              count++;        
+              flag[j]=1;     // set flag[j] to 1, to avoid more than 1 entry of repeated number in the output
+            }
+         }
+         if(count>1)      // if no. of occurrences of element set[i] > 1 (or if the element set[i] is repeated number)
+         {
+           cout<<"\n"<<set[i]<<" -> "<<count;
+         }
+      }
+    }
+return 0;
 }
